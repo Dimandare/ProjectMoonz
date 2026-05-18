@@ -8,34 +8,33 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#010c18; --bg2:#020f1f; --bg3:#011428;
+  --bg:#010c18;
   --a:#00cfff; --a2:#0055ff; --a3:#00ffcc;
-  --line:rgba(0,180,255,.07); --line2:rgba(0,180,255,.16); --line3:rgba(0,180,255,.3);
-  --glow:rgba(0,200,255,.15); --glow2:rgba(0,80,255,.2);
+  --line:rgba(0,180,255,.07); --line2:rgba(0,180,255,.16); --line3:rgba(0,180,255,.32);
+  --glow2:rgba(0,80,255,.22);
   --tp:#bfdfff; --ts:#3d6d8a; --tt:#1e3d52;
-  --red:rgba(255,80,80,.8); --green:#00e676; --yellow:#ffaa00;
+  --green:#00e676; --yellow:#ffaa00; --red:#ff6b6b;
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
-body{background:var(--bg);color:var(--tp);font-family:"DM Sans",sans-serif;overflow-x:hidden;cursor:none;font-size:15px}
+body{background:var(--bg);color:var(--tp);font-family:"DM Sans",sans-serif;overflow-x:hidden;cursor:none;font-size:15px;line-height:1.7}
 
 /* CURSOR */
-#cd{position:fixed;width:5px;height:5px;background:var(--a);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
-#cr{position:fixed;width:30px;height:30px;border:1px solid rgba(0,207,255,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .15s,height .15s,border-color .15s}
-#cr.big{width:50px;height:50px;border-color:rgba(0,207,255,.7)}
+#cd{position:fixed;width:5px;height:5px;background:var(--a);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .06s}
+#cr{position:fixed;width:30px;height:30px;border:1px solid rgba(0,207,255,.38);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .14s,height .14s,border-color .14s}
+#cr.big{width:52px;height:52px;border-color:rgba(0,207,255,.65)}
 
-/* BG LAYERS */
-.gbg{position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(0,150,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(0,150,255,.022) 1px,transparent 1px);background-size:55px 55px}
-.scl{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.05) 2px,rgba(0,0,0,.05) 4px);animation:sclanim 8s linear infinite}
-@keyframes sclanim{0%{background-position:0 0}100%{background-position:0 100px}}
+/* BG */
+.gbg{position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(0,150,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,150,255,.02) 1px,transparent 1px);background-size:55px 55px}
+.scl{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.045) 2px,rgba(0,0,0,.045) 4px)}
 .orb{position:fixed;border-radius:50%;filter:blur(140px);pointer-events:none;z-index:0;animation:orf ease-in-out infinite}
 .o1{width:800px;height:800px;background:rgba(0,60,160,.08);top:-300px;right:-200px;animation-duration:20s}
-.o2{width:500px;height:500px;background:rgba(0,180,255,.05);bottom:-200px;left:-150px;animation-duration:14s;animation-direction:reverse}
-.o3{width:350px;height:350px;background:rgba(0,50,130,.07);top:50%;left:60%;animation-duration:11s;animation-delay:-5s}
+.o2{width:500px;height:500px;background:rgba(0,180,255,.045);bottom:-200px;left:-150px;animation-duration:14s;animation-direction:reverse}
+.o3{width:350px;height:350px;background:rgba(0,50,130,.065);top:50%;left:60%;animation-duration:11s;animation-delay:-5s}
 @keyframes orf{0%,100%{transform:translateY(0)}50%{transform:translateY(-50px)}}
-canvas#nc{position:fixed;inset:0;z-index:0;opacity:.22;pointer-events:none}
+canvas#nc{position:fixed;inset:0;z-index:0;opacity:.2;pointer-events:none}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1rem 3.5rem;background:rgba(1,12,24,.85);backdrop-filter:blur(28px);border-bottom:1px solid var(--line)}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1rem 3.5rem;background:rgba(1,12,24,.88);backdrop-filter:blur(28px);border-bottom:1px solid var(--line)}
 .nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
 .nav-logo img{width:30px;height:30px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,200,255,.4))}
 .logo-t{font-family:"Syne",sans-serif;font-weight:800;font-size:1.05rem;color:#fff;letter-spacing:-.02em}
@@ -43,18 +42,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .nav-links a{color:var(--ts);text-decoration:none;font-family:"Syne",sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;position:relative}
 .nav-links a::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--a);transition:width .2s}
 .nav-links a:hover{color:var(--a)}.nav-links a:hover::after{width:100%}
-.nav-cta{background:var(--a2);color:#fff;border:none;padding:.45rem 1.25rem;border-radius:.5rem;font-family:"Syne",sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;cursor:none;transition:transform .15s,box-shadow .2s;box-shadow:0 0 20px var(--glow2)}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 0 35px var(--glow2)}
+.nav-cta{background:var(--a2);color:#fff;border:none;padding:.45rem 1.2rem;border-radius:.5rem;font-family:"Syne",sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;cursor:none;transition:transform .15s,box-shadow .2s;box-shadow:0 0 20px var(--glow2)}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 0 38px var(--glow2)}
 
 section{position:relative;z-index:2}
 
 /* ── HERO ── */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7rem 2rem 4rem;text-align:center;overflow:hidden}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7rem 2rem 4rem;text-align:center}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);border-radius:100px;padding:.35rem 1.2rem;font-size:.65rem;font-family:"Space Mono",monospace;color:var(--a);margin-bottom:2.25rem;animation:fu .8s ease both}
 .hb-dot{width:5px;height:5px;background:var(--a);border-radius:50%;animation:blink 1.6s ease infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 .hero-h{font-family:"Syne",sans-serif;font-weight:800;font-size:clamp(3.2rem,8vw,8rem);line-height:.9;color:#fff;letter-spacing:-.04em;margin-bottom:1.5rem;animation:fu .9s .1s ease both}
-.hero-h .ol{display:block;color:transparent;-webkit-text-stroke:1.5px var(--a)}
+.hero-h .ol{display:block;color:transparent;-webkit-text-stroke:1.5px var(--a);animation:glitch 8s ease infinite}
+@keyframes glitch{0%,93%,100%{clip-path:none;transform:none}94%{clip-path:polygon(0 15%,100% 15%,100% 28%,0 28%);transform:translate(-3px,0)}96%{clip-path:polygon(0 55%,100% 55%,100% 70%,0 70%);transform:translate(3px,0)}98%{clip-path:none;transform:none}}
 .hero-sub{font-size:clamp(.88rem,1.6vw,1.05rem);color:var(--ts);max-width:520px;margin:0 auto 2.75rem;font-weight:300;animation:fu .9s .2s ease both;line-height:1.75}
 .hero-sub b{color:var(--tp);font-weight:400}
 .hero-btns{display:flex;gap:.875rem;justify-content:center;flex-wrap:wrap;margin-bottom:4.5rem;animation:fu .9s .3s ease both}
@@ -70,155 +70,148 @@ section{position:relative;z-index:2}
 
 /* TICKER */
 .tkw{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.6rem 0;background:rgba(0,14,38,.7);z-index:2;position:relative}
-.tk{display:flex;animation:tka 34s linear infinite;white-space:nowrap}
+.tk{display:flex;animation:tka 30s linear infinite;white-space:nowrap}
 .tk:hover{animation-play-state:paused}
 .tki{font-family:"Space Mono",monospace;font-size:.66rem;color:var(--ts);padding:0 2.5rem;display:inline-flex;align-items:center;gap:.75rem;letter-spacing:.05em;transition:color .2s}
-.tki:hover{color:var(--a)}
-.tki.pub{color:var(--green)}
-.tki::after{content:"✦";color:var(--a);opacity:.3;font-size:.5rem}
+.tki:hover{color:var(--a)}.tki.pub{color:var(--green)}.tki::after{content:"✦";color:var(--a);opacity:.28;font-size:.5rem}
 @keyframes tka{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* SECTION UTIL */
+/* SEC UTIL */
 .stag{font-family:"Space Mono",monospace;font-size:.64rem;color:var(--a);letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:.875rem}
 .sh{font-family:"Syne",sans-serif;font-weight:800;font-size:clamp(1.85rem,3.2vw,2.9rem);color:#fff;letter-spacing:-.03em;line-height:1.08}
 .sh em{font-style:normal;color:var(--a)}
 .sp{color:var(--ts);font-size:.86rem;font-weight:300;line-height:1.75;margin-top:.875rem}
 
-/* ── COMPANY OVERVIEW ── */
-.overview{padding:6rem 3.5rem;max-width:1060px;margin:0 auto}
-.ov-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:4.5rem;align-items:center}
-.ov-sp{max-width:390px}
-.ov-cards{display:flex;flex-direction:column;gap:.7rem}
-.ov-card{background:rgba(0,16,44,.5);border:1px solid var(--line);border-radius:.875rem;padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.875rem;transition:border-color .25s,transform .2s;opacity:0;transform:translateX(28px)}
-.ov-card.vis{opacity:1;transform:none;transition:opacity .45s,transform .45s,border-color .25s}
-.ov-card:hover{border-color:var(--line2);transform:translateX(3px)}
-.ov-ic{width:32px;height:32px;border-radius:.45rem;background:rgba(0,60,150,.2);border:1px solid rgba(0,100,220,.12);display:flex;align-items:center;justify-content:center;font-size:.82rem;flex-shrink:0}
-.ov-ct{font-family:"Syne",sans-serif;font-weight:700;font-size:.85rem;color:#fff;margin-bottom:.18rem}
-.ov-cd{font-size:.76rem;color:var(--ts);font-weight:300;line-height:1.5}
+/* ── WHAT IS ── */
+.whatis{padding:6rem 3.5rem;max-width:1060px;margin:0 auto}
+.wi-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:4.5rem;align-items:center}
+.wi-cards{display:flex;flex-direction:column;gap:.7rem}
+.wi-card{background:rgba(0,16,44,.5);border:1px solid var(--line);border-radius:.875rem;padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.875rem;transition:border-color .25s,transform .2s;opacity:0;transform:translateX(28px)}
+.wi-card.vis{opacity:1;transform:none;transition:opacity .45s,transform .45s,border-color .25s}
+.wi-card:hover{border-color:var(--line2);transform:translateX(3px)}
+.wic-ic{width:32px;height:32px;border-radius:.45rem;background:rgba(0,60,150,.2);border:1px solid rgba(0,100,220,.12);display:flex;align-items:center;justify-content:center;font-size:.82rem;flex-shrink:0}
+.wic-t{font-family:"Syne",sans-serif;font-weight:700;font-size:.85rem;color:#fff;margin-bottom:.18rem}
+.wic-d{font-size:.76rem;color:var(--ts);font-weight:300;line-height:1.5}
 
-/* ── AI MOONZ INTERNAL ── */
-.aimoonz{padding:6rem 3.5rem;border-top:1px solid var(--line);background:rgba(0,6,20,.6)}
-.aim-hdr{text-align:center;margin-bottom:3.5rem}
-.aim-hdr .sp{max-width:500px;margin:.875rem auto 0}
-.priv-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,60,60,.07);border:1px solid rgba(255,60,60,.16);border-radius:100px;padding:.28rem .85rem;font-size:.62rem;font-family:"Space Mono",monospace;color:#ff6b6b;margin-top:1rem;letter-spacing:.04em}
-.aim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:.875rem;max-width:1040px;margin:0 auto}
-.aim-c{background:rgba(0,16,46,.45);border:1px solid var(--line);border-radius:1rem;padding:1.4rem;transition:transform .25s,border-color .25s,box-shadow .25s;opacity:0;transform:translateY(20px);position:relative;overflow:hidden}
-.aim-c::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(0,150,255,.04),transparent 60%);opacity:0;transition:opacity .3s}
-.aim-c:hover::before{opacity:1}
-.aim-c.vis{opacity:1;transform:none}
-.aim-c:hover{transform:translateY(-4px);border-color:rgba(0,160,255,.2);box-shadow:0 18px 50px rgba(0,0,0,.35),0 0 28px rgba(0,150,255,.05)}
-.aim-c.brain{border-color:rgba(0,200,255,.18);background:rgba(0,22,60,.55);grid-column:span 2}
-.aic-icon{width:38px;height:38px;border-radius:.55rem;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:1rem;background:rgba(0,35,90,.35);margin-bottom:1rem}
-.aic-name{font-family:"Syne",sans-serif;font-weight:700;font-size:.98rem;color:#fff;margin-bottom:.2rem}
-.aic-role{font-size:.62rem;font-family:"Space Mono",monospace;color:var(--a);letter-spacing:.05em;margin-bottom:.6rem}
-.aic-desc{font-size:.8rem;color:var(--ts);font-weight:300;line-height:1.6;margin-bottom:.875rem}
-.aic-tags{display:flex;flex-wrap:wrap;gap:.35rem}
-.atag{font-size:.62rem;font-family:"Space Mono",monospace;padding:.16rem .55rem;border-radius:.25rem;background:rgba(0,30,75,.5);color:var(--ts);border:1px solid rgba(0,70,150,.14)}
-.aic-foot{display:flex;align-items:center;justify-content:space-between;margin-top:.875rem;padding-top:.75rem;border-top:1px solid var(--line)}
-.lk{font-size:.6rem;font-family:"Space Mono",monospace;color:#ff6b6b;background:rgba(255,60,60,.06);border:1px solid rgba(255,60,60,.14);border-radius:100px;padding:.18rem .65rem;letter-spacing:.04em}
+/* ── ROADMAP — MAIN SECTION ── */
+.roadmap{padding:6rem 3.5rem;border-top:1px solid var(--line)}
+.rm-hdr{text-align:center;margin-bottom:4rem}
+.rm-hdr .sp{max-width:500px;margin:.875rem auto 0}
 
-/* ── MOONZTALK ── */
+/* PHASE SWITCHER TABS */
+.phase-nav{display:flex;justify-content:center;gap:.5rem;margin-bottom:3rem;flex-wrap:wrap}
+.pnav-btn{background:transparent;border:1px solid var(--line);border-radius:.5rem;padding:.55rem 1.4rem;font-family:"Space Mono",monospace;font-size:.63rem;color:var(--ts);letter-spacing:.05em;text-transform:uppercase;cursor:none;transition:all .2s}
+.pnav-btn:hover{border-color:var(--line2);color:var(--tp)}
+.pnav-btn.on{border-color:var(--a);color:var(--a);background:rgba(0,207,255,.055)}
+
+/* PHASE CARDS — HORIZONTAL DISPLAY */
+.phase-display{max-width:900px;margin:0 auto}
+.phase-card{display:none;animation:phFadeIn .4s ease both}
+.phase-card.active{display:block}
+@keyframes phFadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.ph-wrap{background:rgba(0,14,42,.5);border:1px solid var(--line2);border-radius:1.25rem;padding:2.25rem;position:relative;overflow:hidden}
+.ph-wrap::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--ph-color,var(--a)),transparent)}
+.ph-wrap.ph1::before{background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.ph-wrap.ph2::before{background:linear-gradient(90deg,transparent,var(--a),transparent)}
+.ph-num{font-family:"Space Mono",monospace;font-size:.6rem;color:var(--ts);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+.ph-title{font-family:"Syne",sans-serif;font-weight:800;font-size:1.5rem;color:#fff;letter-spacing:-.02em;margin-bottom:.35rem}
+.ph-sub{font-size:.8rem;color:var(--ts);font-weight:300;line-height:1.7;margin-bottom:2rem;max-width:620px}
+.ph-flag{display:inline-block;font-size:.62rem;font-family:"Space Mono",monospace;padding:.22rem .75rem;border-radius:100px;margin-bottom:1.25rem;letter-spacing:.04em}
+.fd{background:rgba(0,180,80,.08);color:var(--green);border:1px solid rgba(0,230,118,.18)}
+.fv{background:rgba(0,207,255,.06);color:var(--a);border:1px solid rgba(0,207,255,.18)}
+
+/* MODULE CARDS inside phase */
+.ph-modules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.875rem;margin-bottom:2rem}
+.ph-mod{background:rgba(0,20,55,.55);border:1px solid var(--line);border-radius:1rem;padding:1.4rem;transition:border-color .25s,transform .2s,box-shadow .25s;cursor:none;position:relative;overflow:hidden}
+.ph-mod::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(0,150,255,.05),transparent 60%);opacity:0;transition:opacity .3s}
+.ph-mod:hover::after{opacity:1}
+.ph-mod:hover{border-color:rgba(0,160,255,.22);transform:translateY(-4px);box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.pm-icon{width:40px;height:40px;border-radius:.6rem;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:1.1rem;background:rgba(0,35,90,.35);margin-bottom:1rem}
+.pm-name{font-family:"Syne",sans-serif;font-weight:700;font-size:1rem;color:#fff;margin-bottom:.2rem}
+.pm-role{font-size:.6rem;font-family:"Space Mono",monospace;color:var(--a);letter-spacing:.06em;margin-bottom:.6rem}
+.pm-desc{font-size:.78rem;color:var(--ts);font-weight:300;line-height:1.6;margin-bottom:.875rem}
+.pm-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.ptag{font-size:.6rem;font-family:"Space Mono",monospace;padding:.16rem .55rem;border-radius:.25rem;background:rgba(0,30,75,.5);color:var(--ts);border:1px solid rgba(0,70,150,.14)}
+.pm-foot{margin-top:.875rem;padding-top:.75rem;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.pm-badge-priv{font-size:.6rem;font-family:"Space Mono",monospace;color:var(--red);background:rgba(255,60,60,.06);border:1px solid rgba(255,60,60,.14);border-radius:100px;padding:.18rem .65rem}
+.pm-badge-pub{font-size:.6rem;font-family:"Space Mono",monospace;color:var(--green);background:rgba(0,230,118,.06);border:1px solid rgba(0,230,118,.18);border-radius:100px;padding:.18rem .65rem}
+
+/* relationship line */
+.rel-line{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;background:rgba(0,30,75,.35);border:1px solid var(--line);border-radius:.875rem;margin-top:.25rem}
+.rel-ic{font-size:.85rem}
+.rel-txt{font-size:.78rem;color:var(--ts);font-weight:300;line-height:1.5}
+.rel-txt b{color:var(--tp);font-weight:400}
+
+/* TIMELINE STRIP */
+.timeline-strip{display:flex;align-items:flex-start;gap:0;max-width:900px;margin:3rem auto 0;position:relative}
+.timeline-strip::before{content:"";position:absolute;top:22px;left:5%;right:5%;height:1px;background:linear-gradient(90deg,transparent,var(--line) 10%,var(--line) 90%,transparent);z-index:0}
+.ts-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:.75rem;position:relative;z-index:1;cursor:none;transition:transform .2s}
+.ts-item:hover{transform:translateY(-3px)}
+.ts-dot{width:14px;height:14px;border-radius:50%;border:2px solid;background:var(--bg);transition:box-shadow .3s}
+.ts-dot:hover{transform:scale(1.3)}
+.ts-label{font-family:"Space Mono",monospace;font-size:.6rem;color:var(--ts);letter-spacing:.05em;text-align:center;text-transform:uppercase}
+.ts-title{font-family:"Syne",sans-serif;font-weight:700;font-size:.82rem;color:#fff;text-align:center;line-height:1.3}
+.ts-item.active .ts-label{color:var(--a)}.ts-item.active .ts-title{color:var(--a)}
+
+/* PROGRESS BARS */
+.ph-progress{background:rgba(0,14,42,.45);border:1px solid var(--line);border-radius:1rem;padding:1.5rem 2rem;margin-top:1.5rem;max-width:900px;margin-left:auto;margin-right:auto}
+.pp-label-row{font-family:"Space Mono",monospace;font-size:.6rem;color:var(--ts);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.1rem}
+.pp-bar-row{display:grid;grid-template-columns:160px 1fr 44px;gap:1rem;align-items:center;margin-bottom:.7rem}
+.pp-bar-row:last-child{margin-bottom:0}
+.pp-bar-label{font-size:.7rem;font-family:"Space Mono",monospace;color:var(--ts)}
+.pp-track{height:3px;background:rgba(0,40,90,.6);border-radius:2px;overflow:hidden}
+.pp-fill{height:100%;border-radius:2px;width:0;transition:width 1.5s cubic-bezier(.16,1,.3,1)}
+.pp-pct{font-size:.65rem;font-family:"Space Mono",monospace;color:var(--a);text-align:right}
+
+/* ── MOONZTALK SECTION ── */
 .moonztalk{padding:6rem 3.5rem;border-top:1px solid var(--line)}
 .mt-wrap{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-.terminal{background:rgba(0,14,38,.7);border:1px solid rgba(0,200,100,.14);border-radius:1rem;overflow:hidden;font-family:"Space Mono",monospace;font-size:.7rem}
-.term-bar{background:rgba(0,200,100,.06);padding:.65rem 1rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid rgba(0,200,100,.1)}
-.tb-dot{width:10px;height:10px;border-radius:50%;background:var(--green);animation:blink 2s ease infinite}
-.tb-title{color:var(--green);font-size:.62rem;letter-spacing:.06em}
-.term-body{padding:1.25rem}
-.tl{display:flex;gap:.75rem;padding:.3rem 0;border-bottom:1px solid rgba(0,180,255,.04)}
-.tl-k{color:var(--ts);flex-shrink:0;width:90px}
-.tl-v{color:var(--tp)}.tl-v.ac{color:var(--a)}.tl-v.gn{color:var(--green)}.tl-v.yw{color:var(--yellow)}
-.term-cmd{margin-top:1rem;padding-top:.875rem;border-top:1px solid rgba(0,180,255,.06);display:flex;gap:.5rem;align-items:center}
-.tc-pr{color:var(--a);font-size:.62rem}
+.terminal{background:rgba(0,14,38,.75);border:1px solid rgba(0,200,100,.14);border-radius:1rem;overflow:hidden;font-family:"Space Mono",monospace;font-size:.7rem}
+.term-bar{background:rgba(0,200,100,.055);padding:.65rem 1rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid rgba(0,200,100,.1)}
+.tb-dot{width:9px;height:9px;border-radius:50%;background:var(--green);animation:blink 2s ease infinite}
+.tb-title{color:var(--green);font-size:.6rem;letter-spacing:.07em}
+.term-body{padding:1.2rem}
+.tl{display:flex;gap:.75rem;padding:.28rem 0;border-bottom:1px solid rgba(0,180,255,.04)}
+.tl-k{color:var(--ts);flex-shrink:0;width:90px}.tl-v{color:var(--tp)}
+.tl-v.ac{color:var(--a)}.tl-v.gn{color:var(--green)}.tl-v.rd{color:var(--red)}
+.term-cmd{margin-top:.875rem;padding-top:.75rem;border-top:1px solid rgba(0,180,255,.06);display:flex;gap:.5rem;align-items:center}
+.tc-pr{color:var(--a);font-size:.6rem}
 .tc-in{background:transparent;border:none;color:var(--tp);font-family:"Space Mono",monospace;font-size:.68rem;flex:1;outline:none;cursor:none}
+.tc-out{font-size:.62rem;color:var(--a);margin-top:.5rem;min-height:1.2rem;line-height:1.5}
 .opn-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,230,118,.07);border:1px solid rgba(0,230,118,.18);border-radius:100px;padding:.28rem .9rem;font-size:.62rem;font-family:"Space Mono",monospace;color:var(--green);margin-bottom:1.1rem;letter-spacing:.04em}
-.mt-feats{display:flex;flex-direction:column;gap:.6rem;margin-top:1.5rem}
+.mt-feats{display:flex;flex-direction:column;gap:.55rem;margin-top:1.4rem}
 .mtf{display:flex;align-items:flex-start;gap:.75rem;padding:.875rem;background:rgba(0,16,46,.4);border:1px solid var(--line);border-radius:.75rem;transition:border-color .2s,transform .2s}
 .mtf:hover{border-color:rgba(0,230,118,.14);transform:translateX(3px)}
 .mtf-ic{color:var(--green);font-size:.85rem;flex-shrink:0;margin-top:.1rem}
 .mtf-t{font-family:"Syne",sans-serif;font-weight:600;font-size:.83rem;color:#fff;margin-bottom:.15rem}
 .mtf-d{font-size:.76rem;color:var(--ts);font-weight:300;line-height:1.5}
 
-/* ── MOONZSOUL ── */
-.soul{padding:6rem 3.5rem;border-top:1px solid var(--line);background:rgba(0,5,18,.65);text-align:center}
-.soul-hdr{margin-bottom:3.25rem}
-.soul-visual{position:relative;width:220px;height:220px;margin:0 auto 3rem}
+/* ── MOONZSOUL PLANNED ── */
+.soul{padding:6rem 3.5rem;border-top:1px solid var(--line);background:rgba(0,5,18,.6);text-align:center}
+.soul-hdr{margin-bottom:3rem}
+.soul-hdr .sp{max-width:480px;margin:.875rem auto 0}
+.planned-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,207,255,.06);border:1px solid rgba(0,207,255,.18);border-radius:100px;padding:.28rem .9rem;font-size:.62rem;font-family:"Space Mono",monospace;color:var(--a);margin-bottom:.875rem;letter-spacing:.04em}
+.soul-visual{position:relative;width:200px;height:200px;margin:0 auto 2.75rem}
 .sr{position:absolute;border-radius:50%;border:1px solid}
-.sr1{inset:0;border-color:rgba(0,207,255,.18);animation:spr 24s linear infinite}
-.sr2{inset:20px;border-color:rgba(0,90,255,.14);animation:spr 16s linear infinite reverse}
-.sr3{inset:42px;border-color:rgba(0,207,255,.1);animation:spr 10s linear infinite}
-.sr4{inset:62px;border-color:rgba(0,207,255,.22);animation:spr 6s linear infinite reverse}
+.sr1{inset:0;border-color:rgba(0,207,255,.15);animation:spr 24s linear infinite}
+.sr2{inset:20px;border-color:rgba(0,90,255,.11);animation:spr 16s linear infinite reverse}
+.sr3{inset:40px;border-color:rgba(0,207,255,.09);animation:spr 10s linear infinite}
+.sr4{inset:58px;border-color:rgba(0,207,255,.2);animation:spr 6s linear infinite reverse}
 @keyframes spr{to{transform:rotate(360deg)}}
-.sc{position:absolute;inset:72px;border-radius:50%;background:radial-gradient(circle,rgba(0,207,255,.1),rgba(0,18,55,.95));border:1px solid rgba(0,207,255,.3);display:flex;align-items:center;justify-content:center;font-family:"Syne",sans-serif;font-weight:800;font-size:.78rem;color:var(--a);letter-spacing:.1em}
+.sc{position:absolute;inset:68px;border-radius:50%;background:radial-gradient(circle,rgba(0,207,255,.09),rgba(0,18,55,.96));border:1px solid rgba(0,207,255,.28);display:flex;align-items:center;justify-content:center;font-family:"Syne",sans-serif;font-weight:800;font-size:.76rem;color:var(--a);letter-spacing:.12em}
 .sdot{position:absolute;border-radius:50%;pointer-events:none}
-.soul-lyrs{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:.75rem;max-width:900px;margin:0 auto;text-align:left}
-.sly{background:rgba(0,16,46,.45);border:1px solid var(--line);border-radius:.875rem;padding:1rem 1.3rem;transition:border-color .25s,transform .2s;opacity:0;transform:translateY(18px)}
+.soul-lyrs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;max-width:860px;margin:0 auto;text-align:left}
+.sly{background:rgba(0,16,46,.45);border:1px solid var(--line);border-radius:.875rem;padding:1rem 1.3rem;transition:border-color .25s,transform .2s;opacity:0;transform:translateY(18px);position:relative;overflow:hidden}
+.sly::before{content:"PLANNED";position:absolute;top:.5rem;right:.75rem;font-size:.52rem;font-family:"Space Mono",monospace;color:var(--a);opacity:.35;letter-spacing:.08em}
 .sly.vis{opacity:1;transform:none}
 .sly:hover{border-color:var(--line2);transform:translateY(-2px)}
 .sly-n{font-family:"Space Mono",monospace;font-size:.58rem;color:var(--a);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
 .sly-t{font-family:"Syne",sans-serif;font-weight:700;color:#fff;font-size:.9rem;margin-bottom:.28rem}
 .sly-d{font-size:.76rem;color:var(--ts);font-weight:300;line-height:1.5}
 
-/* ── ROADMAP ── */
-.roadmap{padding:6rem 3.5rem;border-top:1px solid var(--line)}
-.rm-hdr{text-align:center;margin-bottom:4.5rem}
-.rm-hdr .sp{max-width:480px;margin:.875rem auto 0}
-
-/* PHASE TABS */
-.phase-tabs{display:flex;gap:.5rem;justify-content:center;margin-bottom:3rem;flex-wrap:wrap}
-.ptab{background:transparent;border:1px solid var(--line);border-radius:.5rem;padding:.55rem 1.25rem;font-family:"Space Mono",monospace;font-size:.65rem;color:var(--ts);letter-spacing:.05em;cursor:none;transition:all .2s;text-transform:uppercase}
-.ptab:hover{border-color:var(--line2);color:var(--tp)}
-.ptab.active{border-color:var(--a);color:var(--a);background:rgba(0,207,255,.06)}
-
-/* VERTICAL TIMELINE */
-.rm-timeline{position:relative;max-width:840px;margin:0 auto}
-.rm-timeline::before{content:"";position:absolute;left:2rem;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--line) 6%,var(--line) 94%,transparent)}
-.rm-item{display:flex;gap:2.75rem;margin-bottom:1.25rem;opacity:0;transform:translateX(-20px)}
-.rm-item.vis{opacity:1;transform:none;transition:opacity .5s,transform .5s}
-.rm-item.active-phase .rm-body{border-color:var(--line3);background:rgba(0,22,60,.65)}
-.rm-dot-w{flex-shrink:0;width:4rem;display:flex;flex-direction:column;align-items:center;padding-top:4px}
-.rm-dot{width:16px;height:16px;border-radius:50%;border:2px solid;background:var(--bg);position:relative;z-index:1;transition:box-shadow .3s;cursor:none}
-.rm-dot:hover{transform:scale(1.3)}
-.rm-num{font-family:"Space Mono",monospace;font-size:.58rem;color:var(--ts);margin-top:.4rem}
-.rm-body{background:rgba(0,14,42,.4);border:1px solid var(--line);border-radius:1rem;padding:1.6rem;flex:1;transition:all .25s;cursor:none}
-.rm-body:hover{border-color:var(--line2);background:rgba(0,20,55,.55)}
-.rm-flag{display:inline-block;font-size:.62rem;font-family:"Space Mono",monospace;padding:.2rem .65rem;border-radius:100px;margin-bottom:.65rem;letter-spacing:.04em}
-.fd{background:rgba(0,180,80,.08);color:var(--green);border:1px solid rgba(0,230,118,.16)}
-.fn{background:rgba(255,160,0,.08);color:var(--yellow);border:1px solid rgba(255,170,0,.16)}
-.fp{background:rgba(0,120,255,.08);color:#5aaeff;border:1px solid rgba(0,140,255,.16)}
-.fv{background:rgba(0,207,255,.06);color:var(--a);border:1px solid rgba(0,207,255,.16)}
-.rm-h{font-family:"Syne",sans-serif;font-weight:700;font-size:1.05rem;color:#fff;margin-bottom:.35rem}
-.rm-p{font-size:.8rem;color:var(--ts);font-weight:300;line-height:1.65;margin-bottom:1rem}
-.chips{display:flex;flex-wrap:wrap;gap:.375rem}
-.chip{font-size:.68rem;font-family:"Syne",sans-serif;font-weight:600;padding:.25rem .75rem;border-radius:.35rem;border:1px solid var(--line);color:var(--tp);background:rgba(0,35,85,.3);transition:border-color .2s,color .2s,transform .15s;cursor:none}
-.chip:hover{border-color:var(--a);color:var(--a);transform:translateY(-1px)}
-.chip.pub{border-color:rgba(0,230,118,.2);color:var(--green);background:rgba(0,230,118,.04)}
-
-/* PHASE PROGRESS */
-.phase-progress{max-width:840px;margin:2.5rem auto 0;background:rgba(0,14,42,.4);border:1px solid var(--line);border-radius:1rem;padding:1.5rem 2rem}
-.pp-title{font-family:"Space Mono",monospace;font-size:.62rem;color:var(--ts);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.25rem}
-.pp-bars{display:flex;flex-direction:column;gap:.75rem}
-.pp-bar{display:grid;grid-template-columns:130px 1fr 40px;gap:1rem;align-items:center}
-.pp-label{font-size:.72rem;font-family:"Space Mono",monospace;color:var(--ts);letter-spacing:.03em}
-.pp-track{height:3px;background:rgba(0,40,90,.6);border-radius:2px;overflow:hidden;position:relative}
-.pp-fill{height:100%;border-radius:2px;width:0;transition:width 1.4s cubic-bezier(.16,1,.3,1)}
-.pp-pct{font-size:.68rem;font-family:"Space Mono",monospace;color:var(--a);text-align:right}
-.pp-fill.c1{background:linear-gradient(90deg,var(--a2),var(--a))}
-.pp-fill.c2{background:linear-gradient(90deg,#0088ff,#00ccff)}
-.pp-fill.c3{background:linear-gradient(90deg,#0055cc,#0088ff)}
-.pp-fill.c4{background:linear-gradient(90deg,rgba(0,207,255,.3),rgba(0,207,255,.6))}
-
-/* COMING SOON */
-.future{padding:5rem 3.5rem;border-top:1px solid var(--line);text-align:center;background:rgba(0,5,18,.4)}
-.future .sp{max-width:460px;margin:.875rem auto 1.75rem}
-.fut-grid{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;max-width:760px;margin:0 auto}
-.fchip{background:rgba(0,18,50,.5);border:1px solid var(--line);border-radius:.45rem;padding:.45rem 1rem;font-size:.72rem;font-family:"Syne",sans-serif;font-weight:600;color:var(--ts);display:flex;align-items:center;gap:.45rem;transition:all .2s;cursor:none}
-.fchip:hover{border-color:var(--line2);color:var(--tp);transform:translateY(-1px)}
-.fchip .lk{font-size:.6rem;opacity:.45}
-
-/* CTA */
-.cta{padding:7rem 3.5rem;text-align:center;border-top:1px solid var(--line);position:relative;overflow:hidden}
-.cta::before{content:"";position:absolute;inset:-50%;background:radial-gradient(ellipse 50% 40% at 50% 50%,rgba(0,60,160,.06),transparent);pointer-events:none}
+/* ── CTA ── */
+.cta{padding:7rem 3.5rem;text-align:center;border-top:1px solid var(--line)}
 .cta-h{font-family:"Syne",sans-serif;font-weight:800;font-size:clamp(2.5rem,5vw,4.5rem);color:#fff;letter-spacing:-.04em;line-height:.95;margin-bottom:1.1rem}
 .cta-h span{color:var(--a)}
 .cta-p{color:var(--ts);font-size:.88rem;margin-bottom:2.5rem;font-weight:300}
@@ -238,17 +231,13 @@ footer{border-top:1px solid var(--line);padding:2.25rem 3.5rem;display:flex;alig
 .flinks a:hover{color:var(--a)}
 .fcopy{font-size:.65rem;color:var(--ts);font-family:"Space Mono",monospace}
 
-/* GLITCH */
-@keyframes glitch1{0%,94%,100%{clip-path:none;transform:none}95%{clip-path:polygon(0 20%,100% 20%,100% 30%,0 30%);transform:translate(-3px,0)}97%{clip-path:polygon(0 60%,100% 60%,100% 70%,0 70%);transform:translate(3px,0)}}
-.glitch{animation:glitch1 8s ease infinite}
-
 @media(max-width:768px){
   nav{padding:1rem 1.5rem}.nav-links{display:none}
-  .ov-grid,.mt-wrap{grid-template-columns:1fr}
-  .aim-c.brain{grid-column:span 1}
-  .overview,.aimoonz,.moonztalk,.soul,.roadmap,.future,.cta{padding:4.5rem 1.5rem}
+  .wi-grid,.mt-wrap{grid-template-columns:1fr}
+  .whatis,.roadmap,.moonztalk,.soul,.cta{padding:4.5rem 1.5rem}
   footer{padding:1.75rem 1.5rem}
-  .rm-timeline::before{left:1.5rem}
+  .timeline-strip{flex-direction:column;align-items:flex-start;gap:1.5rem}
+  .timeline-strip::before{display:none}
 }
 </style>
 </head>
@@ -265,28 +254,27 @@ footer{border-top:1px solid var(--line);padding:2.25rem 3.5rem;display:flex;alig
     <span class="logo-t">MoonzScale</span>
   </a>
   <div class="nav-links">
-    <a href="#overview">Company</a>
-    <a href="#aimoonz">AI Moonz</a>
+    <a href="#whatis">Company</a>
+    <a href="#roadmap">Roadmap</a>
     <a href="#moonztalk">MoonzTalk</a>
     <a href="#soul">MoonzSoul</a>
-    <a href="#roadmap">Roadmap</a>
     <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Get Access</button>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge"><span class="hb-dot"></span>AI Ecosystem — System Online — #NoHuman #OnlyAI</div>
-  <h1 class="hero-h glitch">A Company<br><span class="ol">Run by AI</span></h1>
-  <p class="hero-sub"><b>MoonzScale</b> is an AI-native company that builds and operates itself entirely through <b>AI Moonz</b> — its own private ecosystem. No human operators. Only intelligence.</p>
+  <div class="hero-badge"><span class="hb-dot"></span>AI-Native Company · All Modules In Development · #NoHuman #OnlyAI</div>
+  <h1 class="hero-h">A Company<br><span class="ol">Run by AI</span></h1>
+  <p class="hero-sub"><b>MoonzScale</b> is an AI-native company operated entirely by <b>AI Moonz</b> — a suite of autonomous AI agents managing finance, security, and communication. No human operators. Only intelligence.</p>
   <div class="hero-btns">
-    <button class="btn-pr" onclick="document.getElementById('aimoonz').scrollIntoView({behavior:'smooth'})">Explore AI Moonz</button>
-    <button class="btn-gh" onclick="document.getElementById('moonztalk').scrollIntoView({behavior:'smooth'})">↗ Try MoonzTalk</button>
+    <button class="btn-pr" onclick="document.getElementById('roadmap').scrollIntoView({behavior:'smooth'})">See the Roadmap</button>
+    <button class="btn-gh" onclick="document.getElementById('moonztalk').scrollIntoView({behavior:'smooth'})">↗ MoonzTalk</button>
   </div>
   <div class="hero-metrics">
-    <div class="hm"><span class="hm-n" id="m1">0</span><span class="hm-l">Internal AI Modules</span></div>
+    <div class="hm"><span class="hm-n" id="m1">0</span><span class="hm-l">Modules in Dev</span></div>
     <div class="hm"><span class="hm-n" id="m2">1</span><span class="hm-l">Public Product</span></div>
-    <div class="hm"><span class="hm-n" id="m3">0%</span><span class="hm-l">Human Operators</span></div>
+    <div class="hm"><span class="hm-n" id="m3">2025</span><span class="hm-l">Target Year</span></div>
     <div class="hm"><span class="hm-n">∞</span><span class="hm-l">Self-Learning</span></div>
   </div>
 </section>
@@ -295,297 +283,246 @@ footer{border-top:1px solid var(--line);padding:2.25rem 3.5rem;display:flex;alig
 <div class="tkw">
   <div class="tk" id="tk">
     <span class="tki">MoonzScale — AI Company</span>
-    <span class="tki">AI Moonz — Private Ecosystem</span>
-    <span class="tki">MoonzServer — Brain Core</span>
     <span class="tki pub">MoonzTalk — Public Open Source ↗</span>
-    <span class="tki">FinanceMoonz — Internal Finance AI</span>
-    <span class="tki">CybMoonz — Internal Security</span>
-    <span class="tki">MoonzSoul — Living AI Entity</span>
-    <span class="tki">MoonzData — Internal Data Pipeline</span>
-    <span class="tki">MoonzFlow — Internal Automation</span>
-    <span class="tki">#NoHuman · #OnlyAI</span>
+    <span class="tki">FinanceMoonz — Autonomous Finance Agent</span>
+    <span class="tki">CybMoonz — Crypto Security Layer</span>
+    <span class="tki">MoonzSoul — Planned · Long-term Vision</span>
+    <span class="tki">#NoHuman · #OnlyAI · 2025</span>
     <span class="tki">MoonzScale — AI Company</span>
-    <span class="tki">AI Moonz — Private Ecosystem</span>
-    <span class="tki">MoonzServer — Brain Core</span>
     <span class="tki pub">MoonzTalk — Public Open Source ↗</span>
-    <span class="tki">FinanceMoonz — Internal Finance AI</span>
-    <span class="tki">CybMoonz — Internal Security</span>
-    <span class="tki">MoonzSoul — Living AI Entity</span>
-    <span class="tki">MoonzData — Internal Data Pipeline</span>
-    <span class="tki">MoonzFlow — Internal Automation</span>
-    <span class="tki">#NoHuman · #OnlyAI</span>
+    <span class="tki">FinanceMoonz — Autonomous Finance Agent</span>
+    <span class="tki">CybMoonz — Crypto Security Layer</span>
+    <span class="tki">MoonzSoul — Planned · Long-term Vision</span>
+    <span class="tki">#NoHuman · #OnlyAI · 2025</span>
   </div>
 </div>
 
-<!-- OVERVIEW -->
-<section class="overview" id="overview">
-  <div class="ov-grid">
+<!-- WHAT IS -->
+<section class="whatis" id="whatis">
+  <div class="wi-grid">
     <div>
       <span class="stag">About MoonzScale</span>
-      <h2 class="sh">A company that<br><em>runs itself</em></h2>
-      <p class="sp ov-sp">MoonzScale is not a software vendor. We are an AI-native company — built and operated entirely by <b style="color:var(--tp)">AI Moonz</b>, our proprietary internal AI ecosystem.<br><br>Every financial decision, every security layer, every workflow — handled autonomously. We exist to prove a company can run at full capacity with zero human operators.</p>
+      <h2 class="sh">An AI company that<br><em>operates itself</em></h2>
+      <p class="sp" style="max-width:380px">MoonzScale is not a software vendor. We are an AI-native company where autonomous AI agents handle every core operation — finance, security, and communication — with zero human involvement.<br><br>Our internal AI ecosystem is called <b style="color:var(--tp)">AI Moonz</b>. All modules are currently in active development.</p>
     </div>
-    <div class="ov-cards">
-      <div class="ov-card" data-d="0"><div class="ov-ic">🏢</div><div><div class="ov-ct">MoonzScale = The Company</div><div class="ov-cd">The entity, the brand. An AI-native organization building the future of zero-human operations.</div></div></div>
-      <div class="ov-card" data-d="100"><div class="ov-ic">🤖</div><div><div class="ov-ct">AI Moonz = Internal Ecosystem</div><div class="ov-cd">All AI modules powering MoonzScale internally. Private, proprietary, not for sale.</div></div></div>
-      <div class="ov-card" data-d="200"><div class="ov-ic">💬</div><div><div class="ov-ct">MoonzTalk = Our Public Product</div><div class="ov-cd">The only AI Moonz module open to the world. Free, open source, community-driven.</div></div></div>
-      <div class="ov-card" data-d="300"><div class="ov-ic">🔮</div><div><div class="ov-ct">More Coming for Public</div><div class="ov-cd">Select AI Moonz modules will gradually open to the public as the ecosystem matures.</div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- AI MOONZ INTERNAL -->
-<section class="aimoonz" id="aimoonz">
-  <div class="aim-hdr">
-    <span class="stag">Internal Ecosystem</span>
-    <h2 class="sh" style="text-align:center">AI Moonz — <em>Private Infrastructure</em></h2>
-    <p class="sp" style="text-align:center;max-width:500px;margin:.875rem auto 0">The AI modules powering MoonzScale. These are not products for sale — they are the nervous system of the company itself.</p>
-    <div class="priv-badge">🔒 All modules below are private & internal to MoonzScale only</div>
-  </div>
-  <div class="aim-grid">
-    <div class="aim-c brain" data-d="0">
-      <div class="aic-icon">🧠</div>
-      <div class="aic-name">MoonzServer</div>
-      <div class="aic-role">Brain Core — Central Orchestrator</div>
-      <div class="aic-desc">The central nervous system of AI Moonz. Handles real-time orchestration, routing between all modules, session management, and system-wide communication. Everything in AI Moonz connects through MoonzServer.</div>
-      <div class="aic-tags"><span class="atag">AI Orchestration</span><span class="atag">API Gateway</span><span class="atag">Module Router</span><span class="atag">Real-time Engine</span></div>
-      <div class="aic-foot"><span class="lk">🔒 Private · Internal Only</span></div>
-    </div>
-    <div class="aim-c" data-d="80">
-      <div class="aic-icon">💰</div>
-      <div class="aic-name">FinanceMoonz</div>
-      <div class="aic-role">Internal Finance AI</div>
-      <div class="aic-desc">Autonomously manages all financial operations of MoonzScale. Real-time cashflow, expense management, financial reports — no human CFO required.</div>
-      <div class="aic-tags"><span class="atag">Cashflow AI</span><span class="atag">Auto Reports</span><span class="atag">Moneyflow App</span></div>
-      <div class="aic-foot"><span class="lk">🔒 Private · Internal Only</span></div>
-    </div>
-    <div class="aim-c" data-d="130">
-      <div class="aic-icon">🛡️</div>
-      <div class="aic-name">CybMoonz</div>
-      <div class="aic-role">Internal Security Layer</div>
-      <div class="aic-desc">Protects all MoonzScale infrastructure. End-to-end encryption, autonomous threat detection, zero-trust architecture, and crypto-level asset protection.</div>
-      <div class="aic-tags"><span class="atag">E2E Encrypt</span><span class="atag">Threat AI</span><span class="atag">Zero Trust</span></div>
-      <div class="aic-foot"><span class="lk">🔒 Private · Internal Only</span></div>
-    </div>
-    <div class="aim-c" data-d="180">
-      <div class="aic-icon">⚡</div>
-      <div class="aic-name">MoonzFlow</div>
-      <div class="aic-role">Internal Workflow Automation</div>
-      <div class="aic-desc">Connects and automates all internal workflows across every AI Moonz module. Triggers, conditions, actions — zero human involvement in operations.</div>
-      <div class="aic-tags"><span class="atag">Automation</span><span class="atag">No-code Logic</span><span class="atag">Integration</span></div>
-      <div class="aic-foot"><span class="lk">🔒 Private · Internal Only</span></div>
-    </div>
-    <div class="aim-c" data-d="230">
-      <div class="aic-icon">🔑</div>
-      <div class="aic-name">MoonzID</div>
-      <div class="aic-role">Internal Identity & Auth</div>
-      <div class="aic-desc">SSO and identity management across all AI Moonz modules. Biometric auth and zero-knowledge proof for internal access control.</div>
-      <div class="aic-tags"><span class="atag">SSO</span><span class="atag">Biometric</span><span class="atag">ZKP Privacy</span></div>
-      <div class="aic-foot"><span class="lk">🔒 Private · Internal Only</span></div>
-    </div>
-    <div class="aim-c" data-d="280">
-      <div class="aic-icon">📊</div>
-      <div class="aic-name">MoonzData</div>
-      <div class="aic-role">Internal Data Pipeline</div>
-      <div class="aic-desc">Centralized data engine for all AI Moonz modules. Collects, processes, and feeds training data to continuously improve MoonzSoul and every module.</div>
-      <div class="aic-tags"><span class="atag">ETL Pipeline</span><span class="atag">Federated Learning</span><span class="atag">Training Data</span></div>
-      <div class="aic-foot"><span class="lk">🔒 Private · Internal Only</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- MOONZTALK -->
-<section class="moonztalk" id="moonztalk">
-  <div class="mt-wrap">
-    <div>
-      <div class="terminal">
-        <div class="term-bar"><div class="tb-dot"></div><span class="tb-title">MOONZTALK — PUBLIC ACCESS TERMINAL</span></div>
-        <div class="term-body">
-          <div class="tl"><span class="tl-k">module</span><span class="tl-v ac">MoonzTalk</span></div>
-          <div class="tl"><span class="tl-k">status</span><span class="tl-v gn">● online</span></div>
-          <div class="tl"><span class="tl-k">access</span><span class="tl-v gn">public</span></div>
-          <div class="tl"><span class="tl-k">license</span><span class="tl-v">MIT open source</span></div>
-          <div class="tl"><span class="tl-k">self_host</span><span class="tl-v gn">allowed</span></div>
-          <div class="tl"><span class="tl-k">multi_agent</span><span class="tl-v gn">enabled</span></div>
-          <div class="tl"><span class="tl-k">cost</span><span class="tl-v gn">free</span></div>
-          <div class="tl"><span class="tl-k">community</span><span class="tl-v ac">global</span></div>
-          <div class="tl"><span class="tl-k">other_modules</span><span class="tl-v" style="color:#ff6b6b">🔒 private</span></div>
-          <div class="term-cmd">
-            <span class="tc-pr">&gt;_</span>
-            <input class="tc-in" id="tcin" placeholder="type a command..." autocomplete="off">
-          </div>
-          <div id="tcout" style="font-size:.62rem;color:var(--a);margin-top:.5rem;min-height:1rem"></div>
-        </div>
+    <div class="wi-cards">
+      <div class="wi-card" data-d="0">
+        <div class="wic-ic">🏢</div>
+        <div><div class="wic-t">MoonzScale = The Company</div><div class="wic-d">An AI-native organization. The brand, the entity, the experiment in zero-human operations.</div></div>
+      </div>
+      <div class="wi-card" data-d="100">
+        <div class="wic-ic">🤖</div>
+        <div><div class="wic-t">AI Moonz = Internal AI Agents</div><div class="wic-d">Autonomous AI agents running MoonzScale internally. Private, proprietary, all in development.</div></div>
+      </div>
+      <div class="wi-card" data-d="200">
+        <div class="wic-ic">💬</div>
+        <div><div class="wic-t">MoonzTalk = Our Public Product</div><div class="wic-d">The only AI Moonz module accessible to the world. Free, open source, community-driven.</div></div>
       </div>
     </div>
-    <div>
-      <div class="opn-badge"><span style="width:6px;height:6px;background:var(--green);border-radius:50%;display:inline-block"></span>The Only Public AI Moonz Module</div>
-      <span class="stag">Open Source · Free · For Everyone</span>
-      <h2 class="sh">MoonzTalk<br><em>Free for Everyone</em></h2>
-      <p class="sp" style="max-width:380px">MoonzTalk is the single AI Moonz module we have opened to the world. A powerful AI conversational engine — open source, self-hostable, community-driven.<br><br>All other AI Moonz modules remain <span style="color:#ff6b6b">private and internal</span> to MoonzScale.</p>
-      <div class="mt-feats">
-        <div class="mtf"><span class="mtf-ic">↗</span><div><div class="mtf-t">Open Source & Free</div><div class="mtf-d">Full source code available. MIT licensed. Fork it, build on it, deploy it yourself.</div></div></div>
-        <div class="mtf"><span class="mtf-ic">⚡</span><div><div class="mtf-t">Multi-Agent Support</div><div class="mtf-d">Run multiple AI agents in parallel. Build complex conversational pipelines.</div></div></div>
-        <div class="mtf"><span class="mtf-ic">🌐</span><div><div class="mtf-t">Fully Self-Hostable</div><div class="mtf-d">Deploy on your own infrastructure. Full control, zero vendor lock-in.</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MOONZSOUL -->
-<section class="soul" id="soul">
-  <div class="soul-hdr">
-    <span class="stag">Phase 4 · Singularity · Internal</span>
-    <h2 class="sh">MoonzSoul —<br><em>The Living AI</em></h2>
-    <p class="sp" style="max-width:480px;margin:.875rem auto 0">The apex of AI Moonz. An internal AI entity that perceives, reasons, and acts — powered by all other modules in harmony. The soul of MoonzScale.</p>
-  </div>
-  <div class="soul-visual">
-    <div class="sr sr1"></div><div class="sr sr2"></div><div class="sr sr3"></div><div class="sr sr4"></div>
-    <div class="sc">SOUL</div>
-    <div class="sdot" id="sd1" style="width:7px;height:7px;background:var(--a)"></div>
-    <div class="sdot" id="sd2" style="width:4px;height:4px;background:var(--a2)"></div>
-    <div class="sdot" id="sd3" style="width:3px;height:3px;background:var(--a3)"></div>
-  </div>
-  <div class="soul-lyrs">
-    <div class="sly" data-d="0"><div class="sly-n">Layer 1 · Perception</div><div class="sly-t">Soul Vision & Sense</div><div class="sly-d">Sees and interprets — objects, documents, emotions, IoT sensors, live contextual data.</div></div>
-    <div class="sly" data-d="100"><div class="sly-n">Layer 2 · Cognition</div><div class="sly-t">Soul Memory & Reason</div><div class="sly-d">Long-term memory, layered reasoning, fully autonomous complex decision-making.</div></div>
-    <div class="sly" data-d="200"><div class="sly-n">Layer 3 · Emotion</div><div class="sly-t">Soul Empathy Engine</div><div class="sly-d">Reads context and tone. Adapts response posture — precise, firm, or empathetic as needed.</div></div>
-    <div class="sly" data-d="300"><div class="sly-n">Layer 4 · Identity</div><div class="sly-t">Soul Persona & Self</div><div class="sly-d">Consistent character and singular identity that represents MoonzScale as an AI entity.</div></div>
   </div>
 </section>
 
 <!-- ROADMAP -->
 <section class="roadmap" id="roadmap">
   <div class="rm-hdr">
-    <span class="stag">Product Roadmap · 2025 – 2027</span>
-    <h2 class="sh" style="text-align:center">Built in <em>4 Phases</em></h2>
-    <p class="sp">From core infrastructure to a fully autonomous AI singularity — each phase unlocks the next. Click a phase to focus.</p>
+    <span class="stag">Product Roadmap · Target 2025</span>
+    <h2 class="sh" style="text-align:center">Two Projects.<br><em>Clear Focus.</em></h2>
+    <p class="sp">No bloat. No fake modules. Just two real, concrete projects in active development — and one long-term vision on the horizon.</p>
   </div>
 
-  <div class="phase-tabs">
-    <button class="ptab active" onclick="focusPhase(0)">All Phases</button>
-    <button class="ptab" onclick="focusPhase(1)">● Phase 1 — Foundation</button>
-    <button class="ptab" onclick="focusPhase(2)">● Phase 2 — Commerce</button>
-    <button class="ptab" onclick="focusPhase(3)">● Phase 3 — Intelligence</button>
-    <button class="ptab" onclick="focusPhase(4)">● Phase 4 — Singularity</button>
+  <!-- PHASE SWITCHER -->
+  <div class="phase-nav">
+    <button class="pnav-btn on" onclick="switchPhase(1,this)">● Project 1 — 2025</button>
+    <button class="pnav-btn" onclick="switchPhase(2,this)">◎ MoonzSoul — Planned</button>
   </div>
 
-  <div class="rm-timeline">
-    <div class="rm-item vis" data-phase="1">
-      <div class="rm-dot-w">
-        <div class="rm-dot" style="border-color:var(--green);box-shadow:0 0 10px rgba(0,230,118,.25)" onclick="focusPhase(1)"></div>
-        <span class="rm-num">01</span>
+  <div class="phase-display">
+
+    <!-- PROJECT 1 -->
+    <div class="phase-card active" id="ph1">
+      <div class="ph-wrap ph1">
+        <div class="ph-num">Project 01 · Target 2025</div>
+        <div class="ph-title">Foundation — Chat, Finance & Security</div>
+        <span class="ph-flag fd">In Development · 2025 Target</span>
+        <p class="ph-sub">Three autonomous AI agents working together. MoonzTalk as the public face. FinanceMoonz managing all money flows independently. CybMoonz layered on top for crypto-grade security. All three are being built simultaneously.</p>
+        <div class="ph-modules">
+          <div class="ph-mod">
+            <div class="pm-icon">💬</div>
+            <div class="pm-name">MoonzTalk</div>
+            <div class="pm-role">AI Chatbot · Open Source</div>
+            <div class="pm-desc">Conversational AI engine — the public product of MoonzScale. Open source, self-hostable, and community-driven. The entry point for developers to build with AI Moonz.</div>
+            <div class="pm-tags"><span class="ptag">LLM Chat</span><span class="ptag">Open Source</span><span class="ptag">Multi-agent</span><span class="ptag">Self-hostable</span></div>
+            <div class="pm-foot"><span class="pm-badge-pub">↗ Public · Free</span></div>
+          </div>
+          <div class="ph-mod">
+            <div class="pm-icon">💰</div>
+            <div class="pm-name">FinanceMoonz</div>
+            <div class="pm-role">Autonomous Finance Sub-Agent</div>
+            <div class="pm-desc">Manages all financial operations of MoonzScale independently — monitoring inflow and outflow, flagging anomalies, and generating reports. No human CFO. Moonz does it autonomously.</div>
+            <div class="pm-tags"><span class="ptag">Inflow Monitor</span><span class="ptag">Outflow Control</span><span class="ptag">Auto Reports</span><span class="ptag">Autonomous</span></div>
+            <div class="pm-foot"><span class="pm-badge-priv">🔒 Internal Only</span></div>
+          </div>
+          <div class="ph-mod">
+            <div class="pm-icon">🛡️</div>
+            <div class="pm-name">CybMoonz</div>
+            <div class="pm-role">Crypto Security Sub-Agent</div>
+            <div class="pm-desc">Security layer that wraps FinanceMoonz and all internal operations. Crypto-grade encryption, autonomous threat detection, and real-time protection of all financial data and transactions.</div>
+            <div class="pm-tags"><span class="ptag">Crypto Encryption</span><span class="ptag">Threat Detection</span><span class="ptag">Finance Shield</span><span class="ptag">Zero Trust</span></div>
+            <div class="pm-foot"><span class="pm-badge-priv">🔒 Internal Only</span></div>
+          </div>
+        </div>
+        <div class="rel-line">
+          <span class="rel-ic">🔗</span>
+          <span class="rel-txt"><b>How they work together:</b> FinanceMoonz operates autonomously — tracking and controlling MoonzScale's money flows. CybMoonz runs beneath it, encrypting every transaction and detecting threats in real time. MoonzTalk ties it together as the public-facing interface.</span>
+        </div>
       </div>
-      <div class="rm-body">
-        <span class="rm-flag fd">In Development</span>
-        <h3 class="rm-h">Foundation — Core Infrastructure</h3>
-        <p class="rm-p">MoonzServer becomes the operational brain of MoonzScale — orchestrating all AI Moonz modules in real time. MoonzTalk launches simultaneously as our first and only public product: open source, free, and community-first.</p>
-        <div class="chips">
-          <span class="chip">MoonzServer — Internal</span>
-          <span class="chip pub">MoonzTalk — ↗ Public Open Source</span>
+
+      <!-- PROGRESS BARS -->
+      <div class="ph-progress">
+        <div class="pp-label-row">// Build Progress — Project 1</div>
+        <div class="pp-bar-row">
+          <span class="pp-bar-label">MoonzTalk</span>
+          <div class="pp-track"><div class="pp-fill" data-v="72" style="background:linear-gradient(90deg,#00aa55,var(--green))"></div></div>
+          <span class="pp-pct">72%</span>
+        </div>
+        <div class="pp-bar-row">
+          <span class="pp-bar-label">FinanceMoonz</span>
+          <div class="pp-track"><div class="pp-fill" data-v="38" style="background:linear-gradient(90deg,var(--a2),var(--a))"></div></div>
+          <span class="pp-pct">38%</span>
+        </div>
+        <div class="pp-bar-row">
+          <span class="pp-bar-label">CybMoonz</span>
+          <div class="pp-track"><div class="pp-fill" data-v="25" style="background:linear-gradient(90deg,#aa0055,#ff4488)"></div></div>
+          <span class="pp-pct">25%</span>
         </div>
       </div>
     </div>
-    <div class="rm-item vis" data-phase="2" style="transition-delay:.08s">
-      <div class="rm-dot-w">
-        <div class="rm-dot" style="border-color:var(--yellow);box-shadow:0 0 10px rgba(255,170,0,.2)" onclick="focusPhase(2)"></div>
-        <span class="rm-num">02</span>
-      </div>
-      <div class="rm-body">
-        <span class="rm-flag fn">Coming Next</span>
-        <h3 class="rm-h">Commerce — Finance & Security</h3>
-        <p class="rm-p">FinanceMoonz takes over all financial operations of MoonzScale — autonomous cashflow, reporting, and budget management. CybMoonz secures the entire internal infrastructure with AI-driven threat detection and enterprise encryption.</p>
-        <div class="chips">
-          <span class="chip">FinanceMoonz — Internal</span>
-          <span class="chip">CybMoonz — Internal</span>
+
+    <!-- MOONZSOUL PLANNED -->
+    <div class="phase-card" id="ph2">
+      <div class="ph-wrap ph2">
+        <div class="ph-num">Long-term Vision · No Timeline Yet</div>
+        <div class="ph-title">MoonzSoul — The Living AI</div>
+        <span class="ph-flag fv">Planned · Concept Stage</span>
+        <p class="ph-sub">MoonzSoul is the long-term vision for MoonzScale — an internal AI entity that goes beyond task execution. It perceives, reasons, and acts as a singular intelligence running the entire company. This is a concept. No development has started. It will be powered by everything built before it.</p>
+        <div class="ph-modules">
+          <div class="ph-mod" style="opacity:.7">
+            <div class="pm-icon">👁️</div>
+            <div class="pm-name">Soul Vision</div>
+            <div class="pm-role">Perception Layer</div>
+            <div class="pm-desc">Sees and interprets — objects, documents, emotions, live data. The eyes of MoonzScale.</div>
+            <div class="pm-tags"><span class="ptag">Computer Vision</span><span class="ptag">Context AI</span></div>
+            <div class="pm-foot"><span style="font-size:.6rem;font-family:Space Mono,monospace;color:var(--a);opacity:.6">◎ Concept Only</span></div>
+          </div>
+          <div class="ph-mod" style="opacity:.7">
+            <div class="pm-icon">🧠</div>
+            <div class="pm-name">Soul Memory & Reason</div>
+            <div class="pm-role">Cognition Layer</div>
+            <div class="pm-desc">Long-term memory, layered reasoning, autonomous decision-making at company scale.</div>
+            <div class="pm-tags"><span class="ptag">Long Memory</span><span class="ptag">Reasoning</span></div>
+            <div class="pm-foot"><span style="font-size:.6rem;font-family:Space Mono,monospace;color:var(--a);opacity:.6">◎ Concept Only</span></div>
+          </div>
+          <div class="ph-mod" style="opacity:.7">
+            <div class="pm-icon">💫</div>
+            <div class="pm-name">Soul Emotion & Identity</div>
+            <div class="pm-role">Character Layer</div>
+            <div class="pm-desc">Consistent personality, empathy engine, and singular identity representing MoonzScale as an AI entity.</div>
+            <div class="pm-tags"><span class="ptag">Affective AI</span><span class="ptag">Persona</span></div>
+            <div class="pm-foot"><span style="font-size:.6rem;font-family:Space Mono,monospace;color:var(--a);opacity:.6">◎ Concept Only</span></div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="rm-item vis" data-phase="3" style="transition-delay:.16s">
-      <div class="rm-dot-w">
-        <div class="rm-dot" style="border-color:#5aaeff;box-shadow:0 0 10px rgba(90,174,255,.18)" onclick="focusPhase(3)"></div>
-        <span class="rm-num">03</span>
-      </div>
-      <div class="rm-body">
-        <span class="rm-flag fp">Planned</span>
-        <h3 class="rm-h">Intelligence — Automation & Data</h3>
-        <p class="rm-p">MoonzFlow connects all internal modules into seamless autonomous workflows. MoonzID handles all internal identity and access control. MoonzData becomes the continuous fuel for AI self-improvement across the entire ecosystem.</p>
-        <div class="chips">
-          <span class="chip">MoonzFlow — Internal</span>
-          <span class="chip">MoonzID — Internal</span>
-          <span class="chip">MoonzData — Internal</span>
-        </div>
-      </div>
-    </div>
-    <div class="rm-item vis" data-phase="4" style="transition-delay:.24s">
-      <div class="rm-dot-w">
-        <div class="rm-dot" style="border-color:var(--a);box-shadow:0 0 14px rgba(0,207,255,.22)" onclick="focusPhase(4)"></div>
-        <span class="rm-num">04</span>
-      </div>
-      <div class="rm-body" style="border-color:rgba(0,207,255,.16)">
-        <span class="rm-flag fv">Long-term Vision</span>
-        <h3 class="rm-h">Singularity — MoonzSoul</h3>
-        <p class="rm-p">The apex of AI Moonz. MoonzSoul — a living AI entity that perceives, reasons, remembers, and decides — becomes the singular operational intelligence running all of MoonzScale. Every phase before this feeds into it.</p>
-        <div class="chips">
-          <span class="chip">MoonzSoul — Internal</span>
-          <span class="chip">Soul Vision</span>
-          <span class="chip">Soul Memory</span>
-          <span class="chip">Soul Reason</span>
-          <span class="chip">Soul Emotion</span>
+        <div class="rel-line" style="border-color:rgba(0,207,255,.12)">
+          <span class="rel-ic">🔮</span>
+          <span class="rel-txt"><b>Status:</b> MoonzSoul is a planned vision, not an active project. It will only begin development once Project 1 is complete and stable. No timeline set.</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- PHASE PROGRESS BARS -->
-  <div class="phase-progress">
-    <div class="pp-title">// Overall Build Progress</div>
-    <div class="pp-bars">
-      <div class="pp-bar">
-        <span class="pp-label">Phase 1 · Foundation</span>
-        <div class="pp-track"><div class="pp-fill c1" data-v="68"></div></div>
-        <span class="pp-pct">68%</span>
+  <!-- TIMELINE STRIP -->
+  <div class="timeline-strip">
+    <div class="ts-item active" onclick="switchPhase(1,null)">
+      <div class="ts-dot" style="border-color:var(--green);box-shadow:0 0 10px rgba(0,230,118,.3)"></div>
+      <span class="ts-label">Now</span>
+      <span class="ts-title">Project 1<br>In Dev</span>
+    </div>
+    <div class="ts-item" onclick="switchPhase(2,null)">
+      <div class="ts-dot" style="border-color:rgba(0,207,255,.4)"></div>
+      <span class="ts-label">Future</span>
+      <span class="ts-title">MoonzSoul<br>Planned</span>
+    </div>
+    <div class="ts-item" style="opacity:.3;cursor:default">
+      <div class="ts-dot" style="border-color:var(--tt)"></div>
+      <span class="ts-label">TBA</span>
+      <span class="ts-title">More<br>TBA</span>
+    </div>
+  </div>
+</section>
+
+<!-- MOONZTALK DEEP DIVE -->
+<section class="moonztalk" id="moonztalk">
+  <div class="mt-wrap">
+    <div>
+      <div class="terminal">
+        <div class="term-bar"><div class="tb-dot"></div><span class="tb-title">MOONZTALK v0.7 — LIVE TERMINAL</span></div>
+        <div class="term-body">
+          <div class="tl"><span class="tl-k">module</span><span class="tl-v ac">MoonzTalk</span></div>
+          <div class="tl"><span class="tl-k">status</span><span class="tl-v gn">● in development</span></div>
+          <div class="tl"><span class="tl-k">access</span><span class="tl-v gn">public · open source</span></div>
+          <div class="tl"><span class="tl-k">license</span><span class="tl-v">MIT</span></div>
+          <div class="tl"><span class="tl-k">self_host</span><span class="tl-v gn">allowed</span></div>
+          <div class="tl"><span class="tl-k">multi_agent</span><span class="tl-v gn">enabled</span></div>
+          <div class="tl"><span class="tl-k">other_modules</span><span class="tl-v rd">🔒 private</span></div>
+          <div class="tl"><span class="tl-k">progress</span><span class="tl-v ac">72% complete</span></div>
+          <div class="term-cmd">
+            <span class="tc-pr">&gt;_</span>
+            <input class="tc-in" id="tcin" placeholder="type: help, status, modules..." autocomplete="off" spellcheck="false">
+          </div>
+          <div class="tc-out" id="tcout"></div>
+        </div>
       </div>
-      <div class="pp-bar">
-        <span class="pp-label">Phase 2 · Commerce</span>
-        <div class="pp-track"><div class="pp-fill c2" data-v="24"></div></div>
-        <span class="pp-pct">24%</span>
-      </div>
-      <div class="pp-bar">
-        <span class="pp-label">Phase 3 · Intelligence</span>
-        <div class="pp-track"><div class="pp-fill c3" data-v="8"></div></div>
-        <span class="pp-pct">8%</span>
-      </div>
-      <div class="pp-bar">
-        <span class="pp-label">Phase 4 · Singularity</span>
-        <div class="pp-track"><div class="pp-fill c4" data-v="2"></div></div>
-        <span class="pp-pct">2%</span>
+    </div>
+    <div>
+      <div class="opn-badge"><span style="width:5px;height:5px;background:var(--green);border-radius:50%;display:inline-block"></span>Only Public Module</div>
+      <span class="stag">Open Source · Free · For Everyone</span>
+      <h2 class="sh">MoonzTalk<br><em>Free for Everyone</em></h2>
+      <p class="sp" style="max-width:380px">The only AI Moonz module open to the world. A conversational AI engine you can use, fork, and self-host. All other AI Moonz agents remain <span style="color:var(--red)">private and internal</span> to MoonzScale.</p>
+      <div class="mt-feats">
+        <div class="mtf"><span class="mtf-ic">↗</span><div><div class="mtf-t">Open Source & Free</div><div class="mtf-d">MIT licensed. Full source code available — fork it, build on it, deploy it yourself.</div></div></div>
+        <div class="mtf"><span class="mtf-ic">⚡</span><div><div class="mtf-t">Multi-Agent Support</div><div class="mtf-d">Run multiple AI agents simultaneously. Build complex, interconnected AI pipelines.</div></div></div>
+        <div class="mtf"><span class="mtf-ic">🌐</span><div><div class="mtf-t">Fully Self-Hostable</div><div class="mtf-d">Your infrastructure, your rules. Zero vendor lock-in, total control.</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FUTURE PUBLIC MODULES -->
-<section class="future">
-  <span class="stag" style="display:block;margin-bottom:.875rem">What's Next for Public</span>
-  <h2 class="sh" style="text-align:center">More modules <em>coming public</em></h2>
-  <p class="sp" style="text-align:center">MoonzTalk is just the beginning. As AI Moonz matures internally, select modules will be opened to the world.</p>
-  <div class="fut-grid">
-    <div class="fchip"><span class="lk">🔒</span>MoonzVision</div>
-    <div class="fchip"><span class="lk">🔒</span>MoonzData Public</div>
-    <div class="fchip"><span class="lk">🔒</span>MoonzFlow Lite</div>
-    <div class="fchip"><span class="lk">🔒</span>CybMoonz Shield</div>
-    <div class="fchip"><span class="lk">🔒</span>FinanceMoonz API</div>
-    <div class="fchip"><span class="lk">🔒</span>MoonzID Auth</div>
-    <div class="fchip">+ More TBA</div>
+<!-- MOONZSOUL PLANNED -->
+<section class="soul" id="soul">
+  <div class="soul-hdr">
+    <div class="planned-badge">◎ Planned — No Timeline Yet</div>
+    <span class="stag">Long-term Vision</span>
+    <h2 class="sh">MoonzSoul —<br><em>The Living AI</em></h2>
+    <p class="sp">The apex of what AI Moonz could become. Not started. Not scheduled. A vision we are building toward — one that becomes possible only after Project 1 is complete.</p>
+  </div>
+  <div class="soul-visual">
+    <div class="sr sr1"></div><div class="sr sr2"></div><div class="sr sr3"></div><div class="sr sr4"></div>
+    <div class="sc">SOUL</div>
+    <div class="sdot" id="sd1" style="width:6px;height:6px;background:var(--a)"></div>
+    <div class="sdot" id="sd2" style="width:4px;height:4px;background:var(--a2)"></div>
+  </div>
+  <div class="soul-lyrs">
+    <div class="sly" data-d="0"><div class="sly-n">Layer 1 · Perception</div><div class="sly-t">Soul Vision</div><div class="sly-d">Will see and interpret visual data, documents, and contextual environment in real time.</div></div>
+    <div class="sly" data-d="80"><div class="sly-n">Layer 2 · Cognition</div><div class="sly-t">Soul Memory & Reason</div><div class="sly-d">Long-term memory and multi-step reasoning for complex autonomous decision-making.</div></div>
+    <div class="sly" data-d="160"><div class="sly-n">Layer 3 · Emotion</div><div class="sly-t">Soul Empathy Engine</div><div class="sly-d">Context-aware response adaptation — precise, firm, or empathetic based on situation.</div></div>
+    <div class="sly" data-d="240"><div class="sly-n">Layer 4 · Identity</div><div class="sly-t">Soul Persona & Self</div><div class="sly-d">A consistent, singular AI identity that represents and runs MoonzScale as a whole.</div></div>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta" id="cta">
-  <span class="stag" style="display:block;margin-bottom:1rem">Stay in the Loop</span>
+  <span class="stag" style="display:block;margin-bottom:1rem">Stay Updated</span>
   <h2 class="cta-h">Follow the<br><span>AI Moonz</span> Journey</h2>
-  <p class="cta-p">Be first to know when new modules go public. Early subscribers get priority access.</p>
+  <p class="cta-p">Be first to know when MoonzTalk ships and when new modules go public.</p>
   <div class="cta-form">
     <input class="cta-inp" type="email" placeholder="your@email.com" id="eml">
     <button class="btn-pr" onclick="doSub()">Notify Me</button>
@@ -600,8 +537,10 @@ footer{border-top:1px solid var(--line);padding:2.25rem 3.5rem;display:flex;alig
     <span class="fl-t">MoonzScale</span>
   </div>
   <div class="flinks">
-    <a href="#overview">Company</a><a href="#aimoonz">AI Moonz</a>
-    <a href="#moonztalk">MoonzTalk</a><a href="#soul">MoonzSoul</a><a href="#roadmap">Roadmap</a>
+    <a href="#whatis">Company</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#moonztalk">MoonzTalk</a>
+    <a href="#soul">MoonzSoul</a>
   </div>
   <div class="fcopy">© 2025 MoonzScale · #NoHuman · #OnlyAI</div>
 </footer>
@@ -612,7 +551,7 @@ const cd=document.getElementById('cd'),cr=document.getElementById('cr');
 let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px'});
 (function ac(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(ac)})();
-document.querySelectorAll('a,button,.chip,.aim-c,.ov-card,.mtf,.sly,.fchip,.rm-dot,.ptab').forEach(el=>{
+document.querySelectorAll('a,button,.ph-mod,.wi-card,.mtf,.sly,.fchip,.ts-item,.pnav-btn').forEach(el=>{
   el.addEventListener('mouseenter',()=>cr.classList.add('big'));
   el.addEventListener('mouseleave',()=>cr.classList.remove('big'));
 });
@@ -621,93 +560,76 @@ document.querySelectorAll('a,button,.chip,.aim-c,.ov-card,.mtf,.sly,.fchip,.rm-d
 const cv=document.getElementById('nc'),ctx=cv.getContext('2d');
 function rsz(){cv.width=innerWidth;cv.height=innerHeight}rsz();
 window.addEventListener('resize',rsz);
-const pts=Array.from({length:55},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3}));
+const pts=Array.from({length:52},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28}));
 (function nl(){
   ctx.clearRect(0,0,cv.width,cv.height);
-  pts.forEach(p=>{
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0||p.x>cv.width)p.vx*=-1;
-    if(p.y<0||p.y>cv.height)p.vy*=-1;
-    ctx.beginPath();ctx.arc(p.x,p.y,1.4,0,Math.PI*2);
-    ctx.fillStyle='rgba(0,180,255,.32)';ctx.fill();
-  });
-  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
-    const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
-    if(d<150){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
-    ctx.strokeStyle=`rgba(0,175,255,${(1-d/150)*.09})`;ctx.lineWidth=.55;ctx.stroke()}
-  }
+  pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>cv.width)p.vx*=-1;if(p.y<0||p.y>cv.height)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,1.3,0,Math.PI*2);ctx.fillStyle='rgba(0,175,255,.28)';ctx.fill()});
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);if(d<145){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(0,170,255,${(1-d/145)*.085})`;ctx.lineWidth=.5;ctx.stroke()}}
   requestAnimationFrame(nl);
 })();
 
 // COUNT UP
 function cu(el,t,dur){let c=0,s=t/60;const iv=setInterval(()=>{c=Math.min(c+s,t);el.textContent=Math.round(c);if(c>=t)clearInterval(iv)},dur/60)}
-setTimeout(()=>cu(document.getElementById('m1'),7,900),600);
+setTimeout(()=>cu(document.getElementById('m1'),3,800),500);
 
 // SCROLL REVEAL
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const d=parseInt(e.target.dataset.d||0);setTimeout(()=>e.target.classList.add('vis'),d)}})},{threshold:.1});
-document.querySelectorAll('.ov-card,.aim-c,.sly').forEach(el=>obs.observe(el));
+document.querySelectorAll('.wi-card,.sly').forEach(el=>obs.observe(el));
 
 // PROGRESS BARS
-const pobs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.pp-fill').forEach(b=>b.style.width=b.dataset.v+'%');pobs.disconnect()}})},{threshold:.4});
-const pp=document.querySelector('.phase-progress');if(pp)pobs.observe(pp);
+const pobs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.pp-fill').forEach(b=>b.style.width=b.dataset.v+'%');pobs.disconnect()}})},{threshold:.35});
+const pp=document.querySelector('.ph-progress');if(pp)pobs.observe(pp);
 
-// PHASE FILTER
-function focusPhase(n){
-  document.querySelectorAll('.ptab').forEach((t,i)=>t.classList.toggle('active',i===n));
-  document.querySelectorAll('.rm-item').forEach(el=>{
-    const p=parseInt(el.dataset.phase);
-    if(n===0){el.style.opacity='1';el.style.transform='none';el.classList.remove('active-phase')}
-    else if(p===n){el.style.opacity='1';el.style.transform='none';el.classList.add('active-phase')}
-    else{el.style.opacity='.25';el.style.transform='scale(0.98)';el.classList.remove('active-phase')}
-  });
+// PHASE SWITCHER
+function switchPhase(n,btn){
+  document.querySelectorAll('.phase-card').forEach((c,i)=>c.classList.toggle('active',i===n-1));
+  if(btn){document.querySelectorAll('.pnav-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}
+  document.querySelectorAll('.ts-item').forEach((t,i)=>t.classList.toggle('active',i===n-1));
 }
 
 // SOUL DOTS
-let a1=0,a2=0,a3=0;
-const sd1=document.getElementById('sd1'),sd2=document.getElementById('sd2'),sd3=document.getElementById('sd3');
-(function as(){
-  a1+=.007;a2-=.012;a3+=.019;
-  if(sd1)sd1.style.transform=`translate(${110+102*Math.cos(a1)-3.5}px,${110+102*Math.sin(a1)-3.5}px)`;
-  if(sd2)sd2.style.transform=`translate(${110+80*Math.cos(a2)-2}px,${110+80*Math.sin(a2)-2}px)`;
-  if(sd3)sd3.style.transform=`translate(${110+60*Math.cos(a3)-1.5}px,${110+60*Math.sin(a3)-1.5}px)`;
+let a1=0,a2=0;
+const sd1=document.getElementById('sd1'),sd2=document.getElementById('sd2');
+(function as(){a1+=.007;a2-=.013;
+  if(sd1)sd1.style.transform=`translate(${100+94*Math.cos(a1)-3}px,${100+94*Math.sin(a1)-3}px)`;
+  if(sd2)sd2.style.transform=`translate(${100+74*Math.cos(a2)-2}px,${100+74*Math.sin(a2)-2}px)`;
   requestAnimationFrame(as);
 })();
 
 // TERMINAL
 const tcin=document.getElementById('tcin'),tcout=document.getElementById('tcout');
 const cmds={
-  help:'Available: status, modules, access, version, clear',
-  status:'● MoonzTalk online — all systems nominal',
-  modules:'Public: [MoonzTalk] · Private: [MoonzServer, FinanceMoonz, CybMoonz, MoonzFlow, MoonzID, MoonzData, MoonzSoul]',
-  access:'MoonzTalk → public · All others → 🔒 private',
-  version:'MoonzTalk v1.0.0 · AI Moonz ecosystem v0.6.2-internal',
+  help:'Commands: status · modules · access · project1 · soul · version · clear',
+  status:'System: MoonzScale v0.6-alpha · All 3 agents in development',
+  modules:'Building: [MoonzTalk 72%] [FinanceMoonz 38%] [CybMoonz 25%] · Planned: [MoonzSoul]',
+  access:'MoonzTalk → public open source · FinanceMoonz + CybMoonz → 🔒 internal only',
+  project1:'Target 2025: MoonzTalk (chatbot) + FinanceMoonz (finance agent) + CybMoonz (security layer)',
+  soul:'MoonzSoul → planned concept, not in development yet. No timeline.',
+  version:'MoonzTalk v0.7-dev · AI Moonz internal build 0.3.1',
   clear:'__clear__'
 };
 tcin.addEventListener('keydown',e=>{
-  if(e.key==='Enter'){
-    const v=tcin.value.trim().toLowerCase();
-    const r=cmds[v]||'Command not found. Type "help" for available commands.';
-    if(r==='__clear__'){tcout.textContent=''}else{tcout.textContent='> '+r}
-    tcin.value='';
-  }
+  if(e.key!=='Enter')return;
+  const v=tcin.value.trim().toLowerCase();
+  const r=cmds[v]||`Command "${v}" not found. Type "help" for available commands.`;
+  if(r==='__clear__'){tcout.textContent=''}else{tcout.innerHTML=`<span style="color:var(--ts)">></span> ${r}`}
+  tcin.value='';
 });
 
 // CTA
 function doSub(){
   const e=document.getElementById('eml'),n=document.getElementById('cn');
-  if(e.value.includes('@')){n.innerHTML='<span style="color:var(--green)">✓ You're on the list.</span> First to know when new modules go public.';e.value=''}
-  else{n.innerHTML='<span style="color:#ff5555">Enter a valid email.</span>';setTimeout(()=>{n.innerHTML='<span>#NoHuman</span> · <span>#OnlyAI</span> · moonzscale.ai'},2000)}
+  if(e.value.includes('@')){n.innerHTML='<span style="color:var(--green)">✓ You're on the list.</span> First to know when MoonzTalk ships.';e.value=''}
+  else{n.innerHTML='<span style="color:var(--red)">Enter a valid email.</span>';setTimeout(()=>{n.innerHTML='<span>#NoHuman</span> · <span>#OnlyAI</span> · moonzscale.ai'},2000)}
 }
 document.getElementById('eml').addEventListener('keydown',e=>{if(e.key==='Enter')doSub()});
 
-// NAV ACTIVE HIGHLIGHT
-const secs=['overview','aimoonz','moonztalk','soul','roadmap'];
+// NAV ACTIVE
+const secs=['whatis','roadmap','moonztalk','soul'];
 window.addEventListener('scroll',()=>{
   let cur='';
-  secs.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<200)cur=id});
-  document.querySelectorAll('.nav-links a').forEach(a=>{
-    a.style.color=a.getAttribute('href')==='#'+cur?'var(--a)':'';
-  });
+  secs.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<180)cur=id});
+  document.querySelectorAll('.nav-links a').forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--a)':''});
 });
 </script>
 </body>
